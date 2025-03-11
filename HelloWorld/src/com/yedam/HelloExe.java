@@ -6,7 +6,7 @@ public class HelloExe {
 		System.out.println("Hello, World");
 		
 		//자바는 변수에 타입 지정하고 선언하기.
-		String name = "이승민";
+		String name = "이승민2";
 		
 		System.out.println("이름은 " + name);
 		
