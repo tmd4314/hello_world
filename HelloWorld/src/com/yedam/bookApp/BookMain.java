@@ -24,7 +24,7 @@ public class BookMain {
 	public static void add() {
 		System.out.print("제목 입력>> ");
 		String title = scn.nextLine();
-		if(searchBook(title) != null) {
+		if(search(title) != null) {
 			System.out.println("이미 등록된 제목입니다.");
 			return;
 		}
@@ -125,7 +125,7 @@ public class BookMain {
 	public static void bookInfo() {
 		String title = "";
 		while(true) {
-			System.out.println("조회할 도서를 입력>> ");
+			System.out.print("조회할 도서를 입력>> ");
 			title = scn.nextLine();
 			if(!title.isBlank()) {
 				break;
@@ -133,14 +133,33 @@ public class BookMain {
 			System.out.println("책제목을 반드시 입력하세요.");
 		}
 		
-		Book result = searchBook(title);
+		Book result = search(title);
 		if(result == null) {
 			System.out.println("죄회 결과가 없습니다.");
 			return;
 		}
 		System.out.println(result.showBookInfo());
 	}
-	public static Book searchBook(String title) {
+	public static void companyInfo() {
+		String title = "";
+		while(true) {
+			System.out.print("조회하고싶은 출판사의 도서를 입력>> ");
+			title = scn.nextLine();
+			if(!title.isBlank()) {
+				break;
+			}
+			System.out.println("책 제목을 반드시 입력하세요.");
+		}
+		
+		Book result = search(title);
+		if(result == null) {
+			System.out.println("조회 결과가 없습니다.");
+			return;
+		}
+		System.out.println(result.getCompany());
+		
+	}
+	public static Book search(String title) {
 		for(int i = 0; i< bookStore.length; i++) {
 			if(bookStore[i] != null && bookStore[i].getTitle().equals(title)) {
 				return bookStore[i];
@@ -148,11 +167,12 @@ public class BookMain {
 		}
 		return null;
 	}
+
 	public static void main(String[] args) {
 		boolean run = true;
 		init();
 		while(run) {
-			System.out.println("1.도서등록 2.수정 3.삭제 4.목록 5.상세조회 9.종료");
+			System.out.println("1.도서등록 2.수정 3.삭제 4.목록 5.상세조회 6.출판사조회 9.종료");
 			System.out.print("선택>>");
 			int menu = Integer.parseInt(scn.nextLine());
 			switch(menu) {
@@ -170,6 +190,9 @@ public class BookMain {
 				break;
 			case 5: // 상세조회.
 				bookInfo();
+				break;
+			case 6: // 상세조회.
+				companyInfo();
 				break;
 			case 9: // 종료.
 				System.out.println("프로그램을 종료합니다.");
