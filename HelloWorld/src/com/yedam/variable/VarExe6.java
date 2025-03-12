@@ -3,21 +3,21 @@ package com.yedam.variable;
 import java.util.Scanner;
 
 public class VarExe6 {
-//	public static void test() {
-////		//학생의 점수 (30~100 사이의 점수)
-////		//정수 -> 5개 저장.
-////		int[] scores = new int[500];
-////        for(int i = 0; i < scores.length; i++) { // 수정된 부분
-////            scores[i] = (int) (Math.random() * 71) + 30;
-////        }
-////		
-////		// 홀수의 값을 출력.
-////        for(int i = 0; i < scores.length; i++) { // 수정된 부분
-////            if(scores[i] == 100) {
-////                System.out.println(i + "번째 값: " + scores[i]);
-////            }
-////        }
-//	}// end of test().
+	public static void test() {
+		//학생의 점수 (30~100 사이의 점수)
+		//정수 -> 5개 저장.
+		int[] scores = new int[500];
+        for(int i = 0; i < scores.length; i++) { // 수정된 부분
+            scores[i] = (int) (Math.random() * 71) + 30;
+        }
+		
+		// 홀수의 값을 출력.
+        for(int i = 0; i < scores.length; i++) { // 수정된 부분
+            if(scores[i] == 100) {
+                System.out.println(i + "번째 값: " + scores[i]);
+            }
+        }
+	}// end of test().
 	public static void main(String[] args) {
 		Scanner scn = new Scanner(System.in);
 		
@@ -49,16 +49,16 @@ public class VarExe6 {
 		}
 		
 		//점수가 가장 높은 사람의 이름 출력.
-//		int max = members[0].score;
-//		String name = members[0].name;
-//		for(int i = 0; i < members.length; i++) {
-//			System.out.println(members[i].name +","+ members[i].score);
-//			if(members[i].score > max) {
-//				max = members[i].score;
-//				name = members[i].name;
-//			}
-//		}
-//		System.out.println("최고 점수는 " + max + "점수의 주인은 " +name);
+		int max = members[0].getScore();
+		String name = members[0].getName();
+		for(int i = 0; i < members.length; i++) {
+			System.out.println(members[i].getName() +","+ members[i].getScore());
+			if(members[i].getScore() > max) {
+				max = members[i].getScore();
+				name = members[i].getName();
+			}
+		}
+		System.out.println("최고 점수는 " + max + "점수의 주인은 " +name);
 		
 	}// end of main().
 }
