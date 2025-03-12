@@ -29,11 +29,16 @@ public class Member {
 	public int getScore() {
 		return score;
 	}
+	//score 필드의 값을 지정.
 	public void setScore(int score) {
 		if(score < 0 ||score > 100) {
 			System.out.println("적정값을 입력하세요.");
 			return; // 메소드의 종료.
 		}
 		this.score = score;
+	}
+	// name 필드의 값을 지정.
+	public void setName(String name) {
+		this.name = name;
 	}
 }

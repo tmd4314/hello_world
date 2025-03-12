@@ -21,10 +21,15 @@ public class VarExe6 {
 	public static void main(String[] args) {
 		Scanner scn = new Scanner(System.in);
 		
-		Member m1 = new Member("홍길동", 0); //인스턴스 생성
-		Member m2 = new Member("최민수", 0);
-		Member m3 = new Member("김병수", 0);
-		Member m4 = new Member("박인만", 0);
+		//인스턴스 생성
+		Member m1 = new Member(); 
+		m1.setName("홍길동");
+		Member m2 = new Member();
+		m2.setName("최민수");
+		Member m3 = new Member();
+		m3.setName("김병수");
+		Member m4 = new Member();
+		m4.setName("박인만");
 		
 		//배열.
 		Member[] members = {m1, m2, m3, m4};
