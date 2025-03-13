@@ -2,8 +2,6 @@ package com.yedam.bookApp;
 
 import java.util.Scanner;
 
-import com.yedam.variable.Member;
-
 public class BookMain {
 
 	static Scanner scn = new Scanner(System.in);
@@ -96,11 +94,8 @@ public class BookMain {
 	public static void list() {
 		System.out.println("순번 제목       저자   가격");
 		System.out.println("==================");
-//		for(Book book : bookStore) {
-//			System.out.println(book.showList());
-//		}
-		// 순번정렬.
-		// 순번 1> 순번2, 제외:순번2(null) 순번1(null)
+//		// 순번정렬.
+//		// 순번 1> 순번2, 제외:순번2(null) 순번1(null)
 		Book temp = null;
 		for (int i = 0; i < bookStore.length - 1; i++) {
 			for(int j = 0; j < bookStore.length - 1; j++) {
@@ -115,9 +110,47 @@ public class BookMain {
 			}
 		}
 		int seqNo = 1;
+		Book[] list = searchList(null);
 		for(int i = 0; i < bookStore.length; i++) {
 			if (bookStore[i] != null){
 				System.out.println(seqNo++ + " " + bookStore[i].showList());
+			}
+		}
+	}// end of list().
+	
+	public static Book[] searchList(String keyword) {
+		Book[] list = new Book[100];
+		int idx = 0;
+		for(int i = 0; i < bookStore.length; i++) {
+			if(bookStore[i] != null) {
+				if(keyword == null || bookStore[i].getCompany().equals(keyword)) {
+					list[idx++] = bookStore[i];
+				}	
+			}
+		}
+		return list;
+	}// end of searchlist;
+	
+	public static void searchCompnay(String keyword) {
+		Book[] list = new Book[100];
+		for(int i = 0; i < bookStore.length; i++) {
+			
+		}
+	}
+	
+	public static void companyInfo() {
+		System.out.println("조회할 출판사 정보>> ");
+		String company = scn.nextLine();
+		
+		int seqNo = 1;
+		System.out.println("순번 제목       저자   가격");
+		System.out.println("==================");
+		Book[] list = searchList(company);
+		for(int i = 0; i < bookStore.length; i++) {
+			if (bookStore[i] != null){
+				if(bookStore[i].getCompany().equals(company)) {
+					System.out.println(seqNo++ + " " + bookStore[i].showListWithNo());
+				}
 			}
 		}
 	}
@@ -140,25 +173,7 @@ public class BookMain {
 		}
 		System.out.println(result.showBookInfo());
 	}
-	public static void companyInfo() {
-		String title = "";
-		while(true) {
-			System.out.print("조회하고싶은 출판사의 도서를 입력>> ");
-			title = scn.nextLine();
-			if(!title.isBlank()) {
-				break;
-			}
-			System.out.println("책 제목을 반드시 입력하세요.");
-		}
-		
-		Book result = search(title);
-		if(result == null) {
-			System.out.println("조회 결과가 없습니다.");
-			return;
-		}
-		System.out.println(result.getCompany());
-		
-	}
+	
 	public static Book search(String title) {
 		for(int i = 0; i< bookStore.length; i++) {
 			if(bookStore[i] != null && bookStore[i].getTitle().equals(title)) {
@@ -206,7 +221,10 @@ public class BookMain {
 	}// end of main().
 	public static void init() {
 		bookStore[0] = new Book("자바", "이승민", "한빛", 20000, 1);
-		bookStore[1] = new Book("c++", "김동길", "한빛", 25000, 2);
-		bookStore[2] = new Book("파이썬", "김파이", "한빛", 30000, 3);
+		bookStore[1] = new Book("c++", "김동길", "자빛", 25000, 2);
+		bookStore[2] = new Book("파이썬", "김파이", "오빛", 40000, 3);
+		bookStore[3] = new Book("자바2", "송민승", "자빛", 30000, 4);
+		bookStore[4] = new Book("c++2", "김잠길", "오빛", 15000, 5);
+		bookStore[5] = new Book("파이썬2", "오파이", "한빛", 35000, 6);
 	}
 }
