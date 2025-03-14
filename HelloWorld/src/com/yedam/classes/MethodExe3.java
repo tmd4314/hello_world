@@ -27,7 +27,7 @@ public class MethodExe3 {
 		return sr;
 	}
 	
-	void printCard() {
+	static void printCard() {
 		int[] intAry = new int[16];
 		for(int i = 0; i < intAry.length; i++) {
 			intAry[i] = (int) (Math.random() *16) + 1;

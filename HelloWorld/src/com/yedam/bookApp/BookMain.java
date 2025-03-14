@@ -2,12 +2,21 @@ package com.yedam.bookApp;
 
 import java.util.Scanner;
 
-public class BookMain {
-
-	static Scanner scn = new Scanner(System.in);
-	static Book[] bookStore = new Book[100];
+public class BookMain { 
+	// 2. 정적 필드. 할당.
+	private static BookMain instance = new BookMain();
+	// 1. 생성자 private 선언
+	private BookMain() {
+	}
+	// 3. getInstance() 제공.
+	public static BookMain getInstance() {
+		return instance;
+	}
 	
-	public static int getSequnceNo() {
+	 Scanner scn = new Scanner(System.in);
+	 Book[] bookStore = new Book[100];
+	
+	public  int getSequnceNo() {
 		int max = 0;
 		for(int i = 0; i < bookStore.length; i++) {
 			if(bookStore[i] != null && bookStore[i].getOrderNo() > max) {
@@ -19,7 +28,7 @@ public class BookMain {
 	
 	//등록 기능 
 	// 1. 이미 존재하는 제목은 입력불가.
-	public static void add() {
+	public  void add() {
 		System.out.print("제목 입력>> ");
 		String title = scn.nextLine();
 		if(search(title) != null) {
@@ -48,7 +57,7 @@ public class BookMain {
 	}// end of add().
 	
 	// 수정.
-	public static void edit() {
+	public  void edit() {
 		System.out.print("금액 수정할 도서를 입력>> ");
 		String title = scn.nextLine();
 		boolean isExist2 = false;
@@ -70,7 +79,7 @@ public class BookMain {
 		}
 	}
 	
-	public static void delete() {
+	public  void delete() {
 		System.out.print("삭제할 도서를 입력>>");
 		String title = scn.nextLine();
 		if(title.isBlank()) {
@@ -91,7 +100,7 @@ public class BookMain {
 		}
 	}
 	
-	public static void list() {
+	public  void list() {
 		System.out.println("순번 제목       저자   가격");
 		System.out.println("==================");
 //		// 순번정렬.
@@ -118,7 +127,7 @@ public class BookMain {
 		}
 	}// end of list().
 	
-	public static Book[] searchList(String keyword) {
+	public  Book[] searchList(String keyword) {
 		Book[] list = new Book[100];
 		int idx = 0;
 		for(int i = 0; i < bookStore.length; i++) {
@@ -131,14 +140,14 @@ public class BookMain {
 		return list;
 	}// end of searchlist;
 	
-	public static void searchCompnay(String keyword) {
+	public  void searchCompnay(String keyword) {
 		Book[] list = new Book[100];
 		for(int i = 0; i < bookStore.length; i++) {
 			
 		}
 	}
 	
-	public static void companyInfo() {
+	public  void companyInfo() {
 		System.out.println("조회할 출판사 정보>> ");
 		String company = scn.nextLine();
 		
@@ -155,7 +164,7 @@ public class BookMain {
 		}
 	}
 	
-	public static void bookInfo() {
+	public  void bookInfo() {
 		String title = "";
 		while(true) {
 			System.out.print("조회할 도서를 입력>> ");
@@ -174,7 +183,7 @@ public class BookMain {
 		System.out.println(result.showBookInfo());
 	}
 	
-	public static Book search(String title) {
+	public  Book search(String title) {
 		for(int i = 0; i< bookStore.length; i++) {
 			if(bookStore[i] != null && bookStore[i].getTitle().equals(title)) {
 				return bookStore[i];
@@ -183,7 +192,7 @@ public class BookMain {
 		return null;
 	}
 
-	public static void main(String[] args) {
+	public  void main(String[] args) {
 		boolean run = true;
 		init();
 		while(run) {
@@ -219,7 +228,8 @@ public class BookMain {
 		}
 		System.out.println("end of prog");
 	}// end of main().
-	public static void init() {
+	
+	public  void init() {
 		bookStore[0] = new Book("자바", "이승민", "한빛", 20000, 1);
 		bookStore[1] = new Book("c++", "김동길", "자빛", 25000, 2);
 		bookStore[2] = new Book("파이썬", "김파이", "오빛", 40000, 3);

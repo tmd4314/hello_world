@@ -12,10 +12,10 @@ public class MethodExe2 {
 	}
 	
 	//메소드
-	boolean add(Product prd) {
+	boolean add(Product prod) {
 		for(int i = 0; i < store.length; i++) {
 			if(store[i] == null) {
-				store[i] = prd;
+				store[i] = prod;
 				return true;
 			}
 		}
@@ -66,4 +66,6 @@ public class MethodExe2 {
 		}
 		return false;
 	}// end of modify.
+
+
 }
