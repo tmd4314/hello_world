@@ -2,6 +2,8 @@ package com.yedam.bookApp;
 
 import java.util.Scanner;
 
+import com.yedam.variable.Member;
+
 public class BookMain { 
 	// 2. 정적 필드. 할당.
 	private static BookMain instance = new BookMain();
@@ -15,6 +17,8 @@ public class BookMain {
 	
 	 Scanner scn = new Scanner(System.in);
 	 Book[] bookStore = new Book[100];
+	 User[] users = new User[3]; // User 배열 선언
+	 
 	
 	public  int getSequnceNo() {
 		int max = 0;
@@ -24,6 +28,21 @@ public class BookMain {
 			}
 		}
 		return max + 1; // 현재 마지막번호 + 1;
+	}
+	
+	public  void init() {
+		//책 등록
+		bookStore[0] = new Book("자바", "이승민", "한빛", 20000, 1);
+		bookStore[1] = new Book("c++", "김동길", "자빛", 25000, 2);
+		bookStore[2] = new Book("파이썬", "김파이", "오빛", 40000, 3);
+		bookStore[3] = new Book("자바2", "송민승", "자빛", 30000, 4);
+		bookStore[4] = new Book("c++2", "김잠길", "오빛", 15000, 5);
+		bookStore[5] = new Book("파이썬2", "오파이", "한빛", 35000, 6);
+		
+		//회원 등록
+		users[0] = new User("user1", "이승민", "1234");
+		users[1] = new User("user2", "홍길동", "dltmdals1@");
+		users[2] = new User("user3", "이민승", "dltmdals12!");
 	}
 	
 	//등록 기능 
@@ -191,10 +210,20 @@ public class BookMain {
 		}
 		return null;
 	}
-
-	public  void main(String[] args) {
+	public boolean login(String userId, String password) {
+		for(User user : users) {
+			if(user != null && user.getUserId().equals(userId) && user.getPassword().equals(password)) {
+				System.out.println("로그인 성공: " + user.getUserName());
+				return true;
+			}
+		}
+		System.out.println("로그인 실패: 아이디 또는 비밀번호가 잘못되었습니다.");
+		return false; // 로그인 실패
+	}
+	
+	public void runMain() {
 		boolean run = true;
-		init();
+		
 		while(run) {
 			System.out.println("1.도서등록 2.수정 3.삭제 4.목록 5.상세조회 6.출판사조회 9.종료");
 			System.out.print("선택>>");
@@ -227,14 +256,22 @@ public class BookMain {
 			}
 		}
 		System.out.println("end of prog");
+	}
+
+	public static void main(String[] args) {
+		BookMain app = new BookMain();
+		app.init();
+		while(true) {
+			System.out.print("아이디 입력>> ");
+			String userId = app.scn.nextLine();
+			System.out.print("비밀번호 입력>> ");
+			String password = app.scn.nextLine();
+			if(app.login(userId, password)) {
+				app.runMain();
+				break;
+			}
+		}
 	}// end of main().
 	
-	public  void init() {
-		bookStore[0] = new Book("자바", "이승민", "한빛", 20000, 1);
-		bookStore[1] = new Book("c++", "김동길", "자빛", 25000, 2);
-		bookStore[2] = new Book("파이썬", "김파이", "오빛", 40000, 3);
-		bookStore[3] = new Book("자바2", "송민승", "자빛", 30000, 4);
-		bookStore[4] = new Book("c++2", "김잠길", "오빛", 15000, 5);
-		bookStore[5] = new Book("파이썬2", "오파이", "한빛", 35000, 6);
-	}
+	
 }
