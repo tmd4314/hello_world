@@ -17,10 +17,27 @@ public class BookMain {
 	
 	 Scanner scn = new Scanner(System.in);
 	 Book[] bookStore = new Book[100];
-	 User[] users = new User[3]; // User 배열 선언
+	 User[] users = new User[100]; // User 배열 선언
 	 
+	private void infow() {
+		//회원 등록
+		users[0] = new User("tmd4314", "이승민", "dltmdals1@");
+		users[1] = new User("user2", "홍길동", "1234");
+		users[2] = new User("user3", "이민승", "dltmdals12!");
+	}
 	
-	public  int getSequnceNo() {
+	private boolean login(String userId, String password) {
+		for(User user : users) {
+			if(user != null && user.getUserId().equals(userId) && user.getPassword().equals(password)) {
+				System.out.println("로그인 성공: " + user.getUserName());
+				return true;
+			}
+		}
+		System.out.println("로그인 실패: 아이디 또는 비밀번호가 잘못되었습니다.");
+		return false; // 로그인 실패
+	}
+	 
+	private  int getSequnceNo() {
 		int max = 0;
 		for(int i = 0; i < bookStore.length; i++) {
 			if(bookStore[i] != null && bookStore[i].getOrderNo() > max) {
@@ -30,7 +47,7 @@ public class BookMain {
 		return max + 1; // 현재 마지막번호 + 1;
 	}
 	
-	public  void init() {
+	private  void init() {
 		//책 등록
 		bookStore[0] = new Book("자바", "이승민", "한빛", 20000, 1);
 		bookStore[1] = new Book("c++", "김동길", "자빛", 25000, 2);
@@ -38,16 +55,11 @@ public class BookMain {
 		bookStore[3] = new Book("자바2", "송민승", "자빛", 30000, 4);
 		bookStore[4] = new Book("c++2", "김잠길", "오빛", 15000, 5);
 		bookStore[5] = new Book("파이썬2", "오파이", "한빛", 35000, 6);
-		
-		//회원 등록
-		users[0] = new User("user1", "이승민", "1234");
-		users[1] = new User("user2", "홍길동", "dltmdals1@");
-		users[2] = new User("user3", "이민승", "dltmdals12!");
 	}
 	
 	//등록 기능 
 	// 1. 이미 존재하는 제목은 입력불가.
-	public  void add() {
+	private  void add() {
 		System.out.print("제목 입력>> ");
 		String title = scn.nextLine();
 		if(search(title) != null) {
@@ -76,7 +88,7 @@ public class BookMain {
 	}// end of add().
 	
 	// 수정.
-	public  void edit() {
+	private  void edit() {
 		System.out.print("금액 수정할 도서를 입력>> ");
 		String title = scn.nextLine();
 		boolean isExist2 = false;
@@ -98,7 +110,7 @@ public class BookMain {
 		}
 	}
 	
-	public  void delete() {
+	private  void delete() {
 		System.out.print("삭제할 도서를 입력>>");
 		String title = scn.nextLine();
 		if(title.isBlank()) {
@@ -119,7 +131,7 @@ public class BookMain {
 		}
 	}
 	
-	public  void list() {
+	private  void list() {
 		System.out.println("순번 제목       저자   가격");
 		System.out.println("==================");
 //		// 순번정렬.
@@ -146,7 +158,7 @@ public class BookMain {
 		}
 	}// end of list().
 	
-	public  Book[] searchList(String keyword) {
+	private  Book[] searchList(String keyword) {
 		Book[] list = new Book[100];
 		int idx = 0;
 		for(int i = 0; i < bookStore.length; i++) {
@@ -159,15 +171,15 @@ public class BookMain {
 		return list;
 	}// end of searchlist;
 	
-	public  void searchCompnay(String keyword) {
+	private  void searchCompnay(String keyword) {
 		Book[] list = new Book[100];
 		for(int i = 0; i < bookStore.length; i++) {
 			
 		}
 	}
 	
-	public  void companyInfo() {
-		System.out.println("조회할 출판사 정보>> ");
+	private void companyInfo() {
+		System.out.print("조회할 출판사 정보>> ");
 		String company = scn.nextLine();
 		
 		int seqNo = 1;
@@ -183,7 +195,7 @@ public class BookMain {
 		}
 	}
 	
-	public  void bookInfo() {
+	private  void bookInfo() {
 		String title = "";
 		while(true) {
 			System.out.print("조회할 도서를 입력>> ");
@@ -202,7 +214,7 @@ public class BookMain {
 		System.out.println(result.showBookInfo());
 	}
 	
-	public  Book search(String title) {
+	private  Book search(String title) {
 		for(int i = 0; i< bookStore.length; i++) {
 			if(bookStore[i] != null && bookStore[i].getTitle().equals(title)) {
 				return bookStore[i];
@@ -210,24 +222,26 @@ public class BookMain {
 		}
 		return null;
 	}
-	public boolean login(String userId, String password) {
-		for(User user : users) {
-			if(user != null && user.getUserId().equals(userId) && user.getPassword().equals(password)) {
-				System.out.println("로그인 성공: " + user.getUserName());
-				return true;
-			}
-		}
-		System.out.println("로그인 실패: 아이디 또는 비밀번호가 잘못되었습니다.");
-		return false; // 로그인 실패
-	}
+	
+	
 	
 	public void runMain() {
+		init();
 		boolean run = true;
-		
 		while(run) {
 			System.out.println("1.도서등록 2.수정 3.삭제 4.목록 5.상세조회 6.출판사조회 9.종료");
 			System.out.print("선택>>");
-			int menu = Integer.parseInt(scn.nextLine());
+			//예외 처리.
+			int menu = 9;
+			while(true) {
+				try {
+					menu = Integer.parseInt(scn.nextLine());
+					break;
+				} catch(NumberFormatException e) {
+					System.out.println("숫자를 입력해주세요.");
+					continue;
+				}
+			}
 			switch(menu) {
 			case 1: // 등록.
 				add();
@@ -260,7 +274,7 @@ public class BookMain {
 
 	public static void main(String[] args) {
 		BookMain app = new BookMain();
-		app.init();
+		app.infow();
 		while(true) {
 			System.out.print("아이디 입력>> ");
 			String userId = app.scn.nextLine();

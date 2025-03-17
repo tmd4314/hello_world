@@ -8,10 +8,10 @@ public class BookApp {
 		//mainApp.main(args);
 		
 		BookMain mainApp2 = BookMain.getInstance();
-		mainApp1.add();
-		mainApp1.list();
-		
-		mainApp2.list();
+//		mainApp1.add();
+//		mainApp1.list();
+//		
+//		mainApp2.list();
 		
 		// 숙제:
 				// 1번) BookMain의 main메소드를 통해서만 기능활용하도록 하세요.
