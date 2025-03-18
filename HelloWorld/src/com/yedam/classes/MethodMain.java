@@ -1,6 +1,7 @@
 package com.yedam.classes;
 
 import java.util.Scanner;
+import java.util.List;
 
 public class MethodMain {
 	public static void main(String[] args) {
@@ -24,10 +25,10 @@ public class MethodMain {
 			case 1:
 				
 				prod.setProductName("ALL");
-				Product[] list = m2.productList(prod);
-				for(int i = 0; i < list.length; i++) {
-					if(list[i] != null) {
-						System.out.println(list[i].showList());
+				List<Product> list = m2.productList(prod);
+				for(int i = 0; i < list.size(); i++) {
+					if(list.get(i) != null) {
+						System.out.println(list.get(i).showList());
 					}
 				}
 				break;
@@ -108,10 +109,10 @@ public class MethodMain {
 		search.setProductName("지우개");// 상품코드 상품명 가격
 		search.setPrice(500);
 		
-		Product[] list = m2.productList(search);
-		for(int i = 0; i < list.length; i++) {
-			if(list[i] != null) {
-				System.out.println(list[i].showList());
+		List<Product> list = m2.productList(search);
+		for(int i = 0; i < list.size(); i++) {
+			if(list.get(i) != null) {
+				System.out.println(list.get(i).showList());
 			}
 		}
 	}
