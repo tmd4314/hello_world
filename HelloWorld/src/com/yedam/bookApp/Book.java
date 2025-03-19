@@ -6,6 +6,7 @@ public class Book {
 	private String company;
 	private int price;
 	private int orderNo;
+	private String bookCode;
 	
 	//생성자.
 	public Book() {}
@@ -26,7 +27,7 @@ public class Book {
 	}
 	//메소드
 	public String showList() {
-		return title + " " + author + " " + price;
+		return bookCode + " " + title + " " + author + " " + price;
 	}
 	public String showListWithNo() {
 		return orderNo + " " + title + " " + author + " " + price;
@@ -48,6 +49,9 @@ public class Book {
 	public int getPrice() {
 		return price;
 	}
+	public String getBookCode() {
+		return bookCode;
+	}
 	public void setTitle(String title) {
 		//this는 클래스안에 있는 필드들
 		this.title = title;
@@ -60,6 +64,9 @@ public class Book {
 	}
 	public void setPrice(int price) {
 		this.price = price;
+	}
+	public void setBookCode(String bookCode) {
+		this.bookCode = bookCode;
 	}
 	public int getOrderNo() {
 		return orderNo;

@@ -1,5 +1,6 @@
 package com.yedam.bookApp;
 
+import java.util.List;
 import java.util.Scanner;
 
 import com.yedam.variable.Member;
@@ -16,8 +17,12 @@ public class BookMain {
 	}
 	
 	 Scanner scn = new Scanner(System.in);
-	 Book[] bookStore = new Book[100];
+	 //Book[] bookStore = new Book[100];
 	 User[] users = new User[100]; // User 배열 선언
+	 
+	 BookJdbc dao = new BookJdbc();
+	 
+	 
 	 
 	private void infow() {
 		//회원 등록
@@ -39,33 +44,33 @@ public class BookMain {
 	 
 	private  int getSequnceNo() {
 		int max = 0;
-		for(int i = 0; i < bookStore.length; i++) {
-			if(bookStore[i] != null && bookStore[i].getOrderNo() > max) {
-				max = bookStore[i].getOrderNo();
-			}
-		}
+//		for(int i = 0; i < bookStore.length; i++) {
+//			if(bookStore[i] != null && bookStore[i].getOrderNo() > max) {
+//				max = bookStore[i].getOrderNo();
+//			}
+//		}
 		return max + 1; // 현재 마지막번호 + 1;
 	}
 	
-	private  void init() {
-		//책 등록
-		bookStore[0] = new Book("자바", "이승민", "한빛", 20000, 1);
-		bookStore[1] = new Book("c++", "김동길", "자빛", 25000, 2);
-		bookStore[2] = new Book("파이썬", "김파이", "오빛", 40000, 3);
-		bookStore[3] = new Book("자바2", "송민승", "자빛", 30000, 4);
-		bookStore[4] = new Book("c++2", "김잠길", "오빛", 15000, 5);
-		bookStore[5] = new Book("파이썬2", "오파이", "한빛", 35000, 6);
-	}
+//	private void init() {
+//		//책 등록
+//		bookStore[0] = new Book("자바", "이승민", "한빛", 20000, 1);
+//		bookStore[1] = new Book("c++", "김동길", "자빛", 25000, 2);
+//		bookStore[2] = new Book("파이썬", "김파이", "오빛", 40000, 3);
+//		bookStore[3] = new Book("자바2", "송민승", "자빛", 30000, 4);
+//		bookStore[4] = new Book("c++2", "김잠길", "오빛", 15000, 5);
+//		bookStore[5] = new Book("파이썬2", "오파이", "한빛", 35000, 6);
+//	}
 	
 	//등록 기능 
 	// 1. 이미 존재하는 제목은 입력불가.
-	private  void add() {
+	private void add() {
 		System.out.print("제목 입력>> ");
 		String title = scn.nextLine();
-		if(search(title) != null) {
-			System.out.println("이미 등록된 제목입니다.");
-			return;
-		}
+//		if(searchBook(title) != null) {
+//			System.out.println("이미 등록된 제목입니다.");
+//			return;
+//		}
 		System.out.print("저자 입력>> ");
 		String author = scn.nextLine();
 		System.out.print("출판사 입력>> ");
@@ -78,121 +83,95 @@ public class BookMain {
 		}
 
 		Book book = new Book(title, author, company, Integer.parseInt(price), getSequnceNo());
-
-		for(int i = 0; i < bookStore.length; i++) {
-			if(bookStore[i] == null) {
-				bookStore[i] = book;
-				break;
-			}
+		if(dao.insert(book)) {
+			System.out.println("정상 등록");
+		}else {
+			System.out.println("등록 실패.");
 		}
 	}// end of add().
 	
 	// 수정.
 	private  void edit() {
-		System.out.print("금액 수정할 도서를 입력>> ");
-		String title = scn.nextLine();
-		boolean isExist2 = false;
-		if(title.isBlank()) {
-			System.out.println("책제목을 반드시 입력하세요.");
+		System.out.print("도서코드 입력>> ");
+		String bcode = scn.nextLine();;
+		if(bcode.isBlank()) {
+			System.out.println("도서코드를 반드시 입력하세요.");
 			return;
 		}
-		for(int i = 0; i < bookStore.length; i++) {
-			if(bookStore[i] != null && bookStore[i].getTitle().equals(title)) {
-				System.out.print("수정할 금액입력>> ");
-				int sprice = Integer.parseInt(scn.nextLine());
-				bookStore[i].setPrice(sprice);
-				isExist2 = true;
-				break;
-			}
-		}
-		if(!isExist2) {
-			System.out.println("찾는 도서가 없습니다.");
+		System.out.print("저자입력>> ");
+		String author = scn.nextLine();
+		System.out.print("제목입력>> ");
+		String title = scn.nextLine();
+		System.out.print("출판사>> ");
+		String company = scn.nextLine();
+		System.out.print("금액입력>> ");
+		String sprice = scn.nextLine();
+		
+		Book book = new Book();
+		book.setBookCode(bcode);
+		book.setAuthor(author);
+		book.setTitle(title);
+		book.setCompany(company);
+		book.setPrice( Integer.parseInt(sprice));
+		
+		if(dao.update(book)) {
+			System.out.println("수정성공.");
+		}else {
+			System.out.println("수정실패.");
 		}
 	}
 	
 	private  void delete() {
-		System.out.print("삭제할 도서를 입력>>");
-		String title = scn.nextLine();
-		if(title.isBlank()) {
-			System.out.println("반드시 도서 제목을 입력하시오. ");
+		System.out.print("삭제할 도서코드를 입력>>");
+		String bcode = scn.nextLine();
+		if(bcode.isBlank()) {
+			System.out.println("반드시 도서코드를 입력하시오. ");
 			return;
 		}
-		boolean isExist = false;
-		for(int i = 0; i < bookStore.length; i++) {
-			if(bookStore[i] != null && bookStore[i].getTitle().equals(title)) {
-				bookStore[i] = null;
-				System.out.println("삭제되었습니다.");
-				isExist = true;
-				break;
-			}
-		}
-		if(!isExist) {
-			System.out.println("찾는 도서가 없습니다.");
+		
+		Book book = new Book();
+		book.setBookCode(bcode);
+		
+		if(dao.delete(book)) {
+			System.out.println("삭제 성공.");
+		}else {
+			System.out.println("삭제 실패.");
 		}
 	}
 	
 	private  void list() {
 		System.out.println("순번 제목       저자   가격");
 		System.out.println("==================");
-//		// 순번정렬.
-//		// 순번 1> 순번2, 제외:순번2(null) 순번1(null)
-		Book temp = null;
-		for (int i = 0; i < bookStore.length - 1; i++) {
-			for(int j = 0; j < bookStore.length - 1; j++) {
-				if(bookStore[j + 1] == null) {
-					continue;
-				}
-				if(bookStore[j] == null || bookStore[j].getOrderNo() > bookStore[j + 1].getOrderNo()) {
-					temp =  bookStore[j];
-					bookStore[j] = bookStore[j + 1];
-					bookStore[j + 1] = temp;
-				}
-			}
+		List<Book> list = searchList("");
+		for(Book bk : list) {
+			System.out.println(bk.showList());
 		}
-		int seqNo = 1;
-		Book[] list = searchList(null);
-		for(int i = 0; i < bookStore.length; i++) {
-			if (bookStore[i] != null){
-				System.out.println(seqNo++ + " " + bookStore[i].showList());
-			}
-		}
+
 	}// end of list().
 	
-	private  Book[] searchList(String keyword) {
-		Book[] list = new Book[100];
-		int idx = 0;
-		for(int i = 0; i < bookStore.length; i++) {
-			if(bookStore[i] != null) {
-				if(keyword == null || bookStore[i].getCompany().equals(keyword)) {
-					list[idx++] = bookStore[i];
-				}	
-			}
-		}
+	private List<Book> searchList(String keyword){
+		List<Book> list = dao.list(keyword);
 		return list;
-	}// end of searchlist;
-	
-	private  void searchCompnay(String keyword) {
-		Book[] list = new Book[100];
-		for(int i = 0; i < bookStore.length; i++) {
-			
-		}
 	}
 	
+	
 	private void companyInfo() {
-		System.out.print("조회할 출판사 정보>> ");
-		String company = scn.nextLine();
-		
-		int seqNo = 1;
-		System.out.println("순번 제목       저자   가격");
-		System.out.println("==================");
-		Book[] list = searchList(company);
-		for(int i = 0; i < bookStore.length; i++) {
-			if (bookStore[i] != null){
-				if(bookStore[i].getCompany().equals(company)) {
-					System.out.println(seqNo++ + " " + bookStore[i].showListWithNo());
-				}
+		String company = "";
+		while(true) {
+			System.out.print("조회할 출판사 정보>> ");
+			company = scn.nextLine();
+			if(!company.isBlank()) {
+				break;
 			}
+			System.out.println("출판사를 반드시 입력하세요.");
 		}
+		System.out.println("순번 제목       저자   가격");
+		System.out.println("=========================");
+		List<Book> list = searchList(company);
+		for(Book bk : list) {
+			System.out.println(bk.showList());
+		}
+		
 	}
 	
 	private  void bookInfo() {
@@ -206,7 +185,7 @@ public class BookMain {
 			System.out.println("책제목을 반드시 입력하세요.");
 		}
 		
-		Book result = search(title);
+		Book result = searchBook(title);
 		if(result == null) {
 			System.out.println("죄회 결과가 없습니다.");
 			return;
@@ -214,19 +193,13 @@ public class BookMain {
 		System.out.println(result.showBookInfo());
 	}
 	
-	private  Book search(String title) {
-		for(int i = 0; i< bookStore.length; i++) {
-			if(bookStore[i] != null && bookStore[i].getTitle().equals(title)) {
-				return bookStore[i];
-			}
-		}
-		return null;
+	private  Book searchBook(String title) {
+		return dao.select(title);
 	}
 	
 	
 	
 	public void runMain() {
-		init();
 		boolean run = true;
 		while(run) {
 			System.out.println("1.도서등록 2.수정 3.삭제 4.목록 5.상세조회 6.출판사조회 9.종료");
