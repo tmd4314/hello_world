@@ -5,9 +5,9 @@ import java.util.List;
 
 public class MethodMain {
 	public static void main(String[] args) {
-		Scanner scn;
-		officeApp();
 		
+		officeApp();
+		System.out.println("end of prog.");
 	} //end of main.
 	
 	static void officeApp() {
@@ -23,7 +23,6 @@ public class MethodMain {
 			int menu = Integer.parseInt(scn.nextLine());
 			switch(menu) {
 			case 1:
-				
 				prod.setProductName("ALL");
 				List<Product> list = m2.productList(prod);
 				for(int i = 0; i < list.size(); i++) {
@@ -62,11 +61,11 @@ public class MethodMain {
 				if(m2.remove(delcode)) {
 					System.out.println("삭제성공");
 				};
-
 				break;
 			case 9:
 				System.out.println("프로그램을 종료합니다.");
 				run = false;
+				m2.save();
 				break;
 			default:
 				System.out.println("메뉴를 다시 선택하세요.");

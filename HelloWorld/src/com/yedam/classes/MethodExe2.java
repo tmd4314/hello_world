@@ -1,18 +1,88 @@
 package com.yedam.classes;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Scanner;
 
 public class MethodExe2 {
 	private List<Product> store; //필드
 	
 	//생성자
 	MethodExe2() {
-		store = new ArrayList<Product>();
-		store.add(new Product("A001", "지우개", 500));
-		store.add(new Product("B001", "샤프1000", 1000));
-		store.add(new Product("C001", "연필500", 800));
-		store.add(new Product("D001", "지우개", 1800));
+		init();
 	}
+	
+	void init() {
+		store = new ArrayList<Product>();
+		try {
+			FileInputStream fis = new FileInputStream("c:/temp/object.dat");
+			ObjectInputStream ois = new ObjectInputStream(fis);
+			List<Product> list = (List<Product>) ois.readObject();
+			for(Product prod : list) {
+				 String[] msg = new String[3];
+				 	msg[0] = prod.getProductCode(); // Product 클래스에서 이름을 가져오는 메서드
+		            msg[1] = prod.getProductName(); // Product 클래스에서 설명을 가져오는 메서드
+		            msg[2] = String.valueOf(prod.getPrice()); // Product 클래스에서 가격을 가져오는 메서드
+
+		            // store에 새로운 Product 객체 추가
+		            store.add(new Product(msg[0], msg[1], Integer.parseInt(msg[2])));
+			}
+				
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+//		try {
+//			Scanner scn = new Scanner(new FileInputStream("c:/temp/message.txt"));
+//			while(true) {
+//				String msg = scn.nextLine();
+//				String[] msgAry = msg.split(" ");
+//				store.add(new Product(msgAry[0], msgAry[1], Integer.parseInt(msgAry[2])));
+//			}
+//		} catch (FileNotFoundException e) {
+//			e.printStackTrace();
+//		} catch (NoSuchElementException e) {
+//			
+//		}
+		// 초기화 끝.
+	}
+	
+	// 종료시점에 store 정보를 message.txt에 저장.
+	void save() {
+		
+		try {
+			FileOutputStream fos = new FileOutputStream("c:/temp/object.dat");
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
+				oos.writeObject(store);
+				oos.flush();
+				oos.close();fos.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+//		try {
+//			Writer writer = new FileWriter("c:/temp/message.txt");
+//			for(Product prod : store) {
+//				String msg = prod.getProductCode() + " " + prod.getProductName() + " " + prod.getPrice();
+//				writer.write(msg + "\n");
+//				writer.flush();
+//			}
+//			writer.close();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		} catch (NoSuchElementException e) {
+//			
+//		}
+		// 초기화 끝.
+	};
 	
 	//메소드
 	boolean add(Product prod) {
@@ -62,6 +132,5 @@ public class MethodExe2 {
 		}
 		return false;
 	}// end of modify.
-
 
 }

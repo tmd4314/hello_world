@@ -17,29 +17,14 @@ public class BookMain {
 	}
 	
 	 Scanner scn = new Scanner(System.in);
-	 //Book[] bookStore = new Book[100];
-	 User[] users = new User[100]; // User 배열 선언
 	 
 	 BookJdbc dao = new BookJdbc();
 	 
 	 
-	 
-	private void infow() {
-		//회원 등록
-		users[0] = new User("tmd4314", "이승민", "dltmdals1@");
-		users[1] = new User("user2", "홍길동", "1234");
-		users[2] = new User("user3", "이민승", "dltmdals12!");
-	}
 	
-	private boolean login(String userId, String password) {
-		for(User user : users) {
-			if(user != null && user.getUserId().equals(userId) && user.getPassword().equals(password)) {
-				System.out.println("로그인 성공: " + user.getUserName());
-				return true;
-			}
-		}
-		System.out.println("로그인 실패: 아이디 또는 비밀번호가 잘못되었습니다.");
-		return false; // 로그인 실패
+	private User login(String id, String pw) {
+		MemberJdbc dao = new MemberJdbc();
+		return dao.login(id, pw);
 	}
 	 
 	private  int getSequnceNo() {
@@ -52,25 +37,15 @@ public class BookMain {
 		return max + 1; // 현재 마지막번호 + 1;
 	}
 	
-//	private void init() {
-//		//책 등록
-//		bookStore[0] = new Book("자바", "이승민", "한빛", 20000, 1);
-//		bookStore[1] = new Book("c++", "김동길", "자빛", 25000, 2);
-//		bookStore[2] = new Book("파이썬", "김파이", "오빛", 40000, 3);
-//		bookStore[3] = new Book("자바2", "송민승", "자빛", 30000, 4);
-//		bookStore[4] = new Book("c++2", "김잠길", "오빛", 15000, 5);
-//		bookStore[5] = new Book("파이썬2", "오파이", "한빛", 35000, 6);
-//	}
-	
 	//등록 기능 
 	// 1. 이미 존재하는 제목은 입력불가.
 	private void add() {
 		System.out.print("제목 입력>> ");
 		String title = scn.nextLine();
-//		if(searchBook(title) != null) {
-//			System.out.println("이미 등록된 제목입니다.");
-//			return;
-//		}
+		if(searchBook(title) != null) {
+			System.out.println("이미 등록된 제목입니다.");
+			return;
+		}
 		System.out.print("저자 입력>> ");
 		String author = scn.nextLine();
 		System.out.print("출판사 입력>> ");
@@ -247,13 +222,15 @@ public class BookMain {
 
 	public static void main(String[] args) {
 		BookMain app = new BookMain();
-		app.infow();
 		while(true) {
 			System.out.print("아이디 입력>> ");
-			String userId = app.scn.nextLine();
+			String id = app.scn.nextLine();
 			System.out.print("비밀번호 입력>> ");
-			String password = app.scn.nextLine();
-			if(app.login(userId, password)) {
+			String pw = app.scn.nextLine();
+			// User 클래스, Map 컬랙션.
+			User user = app.login(id,pw);
+			if(user != null) {
+				System.out.println(user.getUserName() + "님 환영합니다.");
 				app.runMain();
 				break;
 			}

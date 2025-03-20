@@ -111,9 +111,13 @@ public class BookJdbc {
 	public List<Book> list(String company) {
 		List<Book> list = new ArrayList<Book>();
 		Connection conn = getConnect();
-		String sql = "select * "
-		           + "from tbl_book "
-		           + "where company = nvl(?, company) "
+		String sql = "select book_code, "
+				   + "       book_title, "
+				   + "       author, "
+				   + "       company, "
+				   + "       price "
+		           + "from   tbl_book "
+		           + "where  company = nvl(?, company) "
 		           + "order by book_code";
 
 		try {
@@ -140,9 +144,13 @@ public class BookJdbc {
 	public Book select(String title) {
 		
 		Connection conn = getConnect();
-		String sql = "select * "
-		           + "from tbl_book "
-		           + "where book_title = ? ";
+		String sql = "select book_code, "
+				   + "       book_title,"
+				   + "       author,"
+				   + "       company,"
+				   + "       price "
+		           + "from   tbl_book "
+		           + "where  book_title = ? ";
 
 		try {
 			PreparedStatement psmt = conn.prepareStatement(sql);
