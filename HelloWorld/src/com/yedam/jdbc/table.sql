@@ -117,11 +117,31 @@ delete from tbl_book;
 
 commit;
 
+create table  tbl_member(
+  user_id    varchar2(10) primary key,
+  password   varchar2(30) not null,
+  user_name  varchar(50)  not null
+);
 
 
+insert into tbl_member
+values ('tmd4314', 
+        'dltmdals1@', 
+        '이승민');
+
+insert into tbl_member
+values ('user1', 
+        '1234', 
+        '홍길동');
+
+insert into tbl_member
+values ('user2', 
+        '1111', 
+        '강승동');
 
 
-
+select *
+from   tbl_member;
 
 
 
