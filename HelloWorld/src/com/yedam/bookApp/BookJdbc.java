@@ -82,14 +82,13 @@ public class BookJdbc {
 	//수정.
 	public boolean update(Book book) {
 		Connection conn = getConnect();
-		String update = "update tbl_book\r\n "
+		String update = "update tbl_book "
 				       + "set   book_title =  nvl(?, book_title), "
 				       +"       price =  ?,"
 				       +"       author = nvl(?, author), "
 				       + "      company = nvl(?, company) \r\n "
 				       +" where  book_code = ?";
 		try {
-//			Statement stmt = conn.createStatement();
 			PreparedStatement stmt = conn.prepareStatement(update);
 			stmt.setString(1, book.getTitle());
 			stmt.setInt(2, book.getPrice());

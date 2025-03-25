@@ -27,15 +27,6 @@ public class BookMain {
 		return dao.login(id, pw);
 	}
 	 
-	private  int getSequnceNo() {
-		int max = 0;
-//		for(int i = 0; i < bookStore.length; i++) {
-//			if(bookStore[i] != null && bookStore[i].getOrderNo() > max) {
-//				max = bookStore[i].getOrderNo();
-//			}
-//		}
-		return max + 1; // 현재 마지막번호 + 1;
-	}
 	
 	//등록 기능 
 	// 1. 이미 존재하는 제목은 입력불가.
@@ -57,7 +48,7 @@ public class BookMain {
 			return; // 메소드의 종료.
 		}
 
-		Book book = new Book(title, author, company, Integer.parseInt(price), getSequnceNo());
+		Book book = new Book(title, author, company, Integer.parseInt(price));
 		if(dao.insert(book)) {
 			System.out.println("정상 등록");
 		}else {
