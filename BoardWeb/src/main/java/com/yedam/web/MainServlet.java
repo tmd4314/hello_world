@@ -21,6 +21,7 @@ import com.yedam.vo.BoardVo;
  * 1. URL 패턴(ex:http://localhost/BoardWeb/welcome)
  * 2. 서블릿클래스 (init() -> service() -> destroy())
  */
+
 public class MainServlet extends HttpServlet{
 	//생성자.
 	public MainServlet() {
@@ -49,7 +50,7 @@ public class MainServlet extends HttpServlet{
 			for (BoardVo board: list) {
 				html += "<tr>";
 				html += "<td>"+board.getBoardNo()+"</td>";
-				html += "<td>"+board.getTitle()+"</td>";
+				html += "<td><a href='getboard?board_no="+board.getBoardNo()+"'>"+board.getTitle()+"</a></td>";
 				html += "<td>"+board.getWriter()+"</td>";
 				html += "<td>"+board.getWriteDate()+"</td>";
 				html += "</tr>";
