@@ -10,24 +10,26 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.yedam.common.Control;
 import com.yedam.common.DataSource;
-import com.yedam.common.PageDTO;
 import com.yedam.mapper.BoardMapper;
 import com.yedam.vo.BoardVo;
 
-public class BoardControl implements Control {
+public class DeleteBoardControl implements Control {
 
 	@Override
 	public void exec(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		String bno = req.getParameter("bno");
 		String page = req.getParameter("page");
 		
+		// mybatis를 활용해서 jdbc 처리.
 		SqlSession sqlSession = DataSource.getInstance().openSession(true);
 		BoardMapper mapper = sqlSession.getMapper(BoardMapper.class);
-		BoardVo board = mapper.infoBoard(Integer.parseInt(bno));
-		req.setAttribute("board", board);
-		req.setAttribute("page", page);
-		
-		req.getRequestDispatcher("/WEB-INF/views/boardInfo.jsp").forward(req, resp);
+		int r = mapper.deleteBoard(Integer.parseInt(bno));
+		if(r > 0 ) {
+			resp.sendRedirect("boardList.do"); //요청재지정.
+		}else {
+			System.out.println("게시글 삭제 실패");
+		}
 	}
-	
+
 }

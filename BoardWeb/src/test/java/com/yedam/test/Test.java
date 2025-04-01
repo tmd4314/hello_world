@@ -12,7 +12,7 @@ import com.yedam.vo.BoardVo;
 public class Test {
 	public static void main(String[] args) {
 		SqlSessionFactory sqlSessionFactory = DataSource.getInstance();
-		
+		int page = 1;
 		BoardVo board = new BoardVo();
 		board.setTitle("메퍼테스토44");
 		board.setContent("메퍼를 활용한 입력테스트");
@@ -30,7 +30,7 @@ public class Test {
 			}else{
 				System.out.println("등록실패.");
 			}
-			List<BoardVo> list = mapper.selectBoard();
+			List<BoardVo> list = mapper.selectBoard(page);
 			//sqlSession.selectList("com.yedam.mapper.BoardMapper.selectBoard");
 			for(BoardVo brd: list) {
 				System.out.println(brd.toString());

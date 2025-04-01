@@ -14,10 +14,10 @@ import com.yedam.common.PageDTO;
 import com.yedam.mapper.BoardMapper;
 import com.yedam.vo.BoardVo;
 
-public class BoardControl implements Control {
-
+public class ModifyFormControl implements Control{
 	@Override
 	public void exec(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		// bno = 15 단건조회. modifyBoard.jsp
 		String bno = req.getParameter("bno");
 		String page = req.getParameter("page");
 		
@@ -26,8 +26,6 @@ public class BoardControl implements Control {
 		BoardVo board = mapper.infoBoard(Integer.parseInt(bno));
 		req.setAttribute("board", board);
 		req.setAttribute("page", page);
-		
-		req.getRequestDispatcher("/WEB-INF/views/boardInfo.jsp").forward(req, resp);
+		req.getRequestDispatcher("/WEB-INF/views/modifyBoard.jsp").forward(req, resp);
 	}
-	
 }

@@ -6,15 +6,15 @@
 		<table class = "table">
 			<tr>
 				<th>글제목</th>
-				<td><input class = "form_control" type = "text" name = "title"></td>
+				<td><input class = "form-control" type = "text" name = "title"></td>
 			</tr>
 			<tr>
 				<th>작성자</th>
-				<td><input class = "form_control" type = "text" name = "writer"></td>
+				<td><input class = "form-control" type = "text" name = "writer"></td>
 			</tr>
 			<tr>
 				<th>본문</th>
-				<td><textarea class = "form_control" name = "content" rows ="3" cols = "40"></textarea></td>
+				<td><textarea class = "form-control" name = "content" rows ="3" cols = "40"></textarea></td>
 			</tr>
 			<tr>
 				<td colspan="2" align = "center">
