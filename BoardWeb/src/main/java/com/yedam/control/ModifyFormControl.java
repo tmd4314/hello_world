@@ -5,12 +5,12 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 
 import com.yedam.common.Control;
 import com.yedam.common.DataSource;
-import com.yedam.common.PageDTO;
 import com.yedam.mapper.BoardMapper;
 import com.yedam.vo.BoardVo;
 
@@ -24,8 +24,18 @@ public class ModifyFormControl implements Control{
 		SqlSession sqlSession = DataSource.getInstance().openSession(true);
 		BoardMapper mapper = sqlSession.getMapper(BoardMapper.class);
 		BoardVo board = mapper.infoBoard(Integer.parseInt(bno));
+		
+		// 권한체크. 
+		HttpSession session = req.getSession();
+		String logId = (String) session.getAttribute("logId");
 		req.setAttribute("board", board);
 		req.setAttribute("page", page);
-		req.getRequestDispatcher("/WEB-INF/views/modifyBoard.jsp").forward(req, resp);
+		
+		if(logId != null && logId.equals(board.getWriter())) {
+			req.getRequestDispatcher("/WEB-INF/views/modifyBoard.jsp").forward(req, resp);
+		} else {
+			req.setAttribute("msg", "권한이 없습니다");
+			req.getRequestDispatcher("/WEB-INF/views/boardInfo.jsp").forward(req, resp);
+		}
 	}
 }
