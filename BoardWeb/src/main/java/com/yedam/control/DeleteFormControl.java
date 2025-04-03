@@ -24,7 +24,7 @@ public class DeleteFormControl implements Control {
 		BoardVo board = mapper.infoBoard(Integer.parseInt(bno));
 		
 		req.setAttribute("board", board);
-		req.getRequestDispatcher("/WEB-INF/views/deleteForm.jsp").forward(req, resp);
+		req.getRequestDispatcher("board/deleteForm.tiles").forward(req, resp);
 	}
 
 }

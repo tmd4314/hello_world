@@ -27,7 +27,7 @@ public class BoardControl implements Control {
 		req.setAttribute("board", board);
 		req.setAttribute("page", page);
 		
-		req.getRequestDispatcher("/WEB-INF/views/boardInfo.jsp").forward(req, resp);
+		req.getRequestDispatcher("board/boardInfo.tiles").forward(req, resp);
 	}
 	
 }

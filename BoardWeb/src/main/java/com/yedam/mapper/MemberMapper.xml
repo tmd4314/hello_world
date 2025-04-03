@@ -7,9 +7,23 @@
 		select user_id,
 		       password,
 		       user_name,
-		       responsibility
+		       responsibility,
+		       images
 		from   tbl_member
 		where  user_id = #{id}
 		  and  password = #{pw}
 	</select>
+	
+	<insert id="insertMember" parameterType="member">
+		insert into tbl_member (user_id,
+		                       user_name,
+		                       password,
+		                       responsibility,
+		                       images)
+		values(#{userId},
+		       #{userName},
+		       #{password},
+		       'User',
+		       #{images})
+	</insert>
 </mapper>

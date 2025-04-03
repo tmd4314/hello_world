@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -128,9 +130,6 @@ span.psw {
 </style>
 </head>
 <body>
-<%
-  String msg = (String) request.getAttribute("msg");
-%>
 
 <h2>Modal Login Form</h2>
 
@@ -146,14 +145,11 @@ span.psw {
 
     <div class="container">
       <!-- msg 출력. -->
-      <%
-        if (msg != null) {
-      %>
-      <p style="color: red"><%=msg %></p>
-      <%
-        }
-      %>
-      
+
+      <c:if test="${msg != null }">
+      <p style="color: red"><c:out value="${msg }"/></p>
+      </c:if>
+
       <label for="uname"><b>Username</b></label>
       <input type="text" placeholder="Enter Username" name="uname" required>
 

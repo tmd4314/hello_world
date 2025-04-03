@@ -17,12 +17,7 @@ public class MainControl implements Control{
 			HttpSession session = req.getSession();
 			String logId = (String) session.getAttribute("logId");
 			
-			if (logId == null) {
-				resp.sendRedirect("loginForm.do");
-			} else {
-				req.getRequestDispatcher("WEB-INF/views/main.jsp").forward(req, resp);
-			}
-		
+			req.getRequestDispatcher("common/main.tiles").forward(req, resp);
 	}
 	
 }

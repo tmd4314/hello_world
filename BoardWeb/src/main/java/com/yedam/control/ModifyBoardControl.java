@@ -34,8 +34,8 @@ public class ModifyBoardControl implements Control {
 		// mybatis를 활용해서 jdbc 처리.
 		SqlSession sqlSession = DataSource.getInstance().openSession(true);
 		BoardMapper mapper = sqlSession.getMapper(BoardMapper.class);
-		int r = mapper.updateBoard(board);
 		req.setAttribute("page", page);
+		int r = mapper.updateBoard(board);
 		if(r > 0 ) {
 			resp.sendRedirect("boardList.do?page=" + page); //요청재지정.
 		}else {

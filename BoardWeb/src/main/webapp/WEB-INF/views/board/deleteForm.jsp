@@ -2,12 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<jsp:include page="includes/header.jsp"/>
-
-<h3>수정화면(modify.do)</h3>
-<form action="modifyBoard.do">
+<h3>삭제화면(delete.do)</h3>
+<form action="deleteBoard.do"  onsubmit="return delOk()">
 	<input type = "hidden" name="bno" value="${board.boardNo }">
-	<input type = "hidden" name="page" value="${page }">
 	<table class = "table">
 		<tr>
 			<th>글번호</th>
@@ -31,11 +28,18 @@
 		</tr>
 		<tr>
 			<td colspan="3">
-				<input type = "submit" value="수정" class = "btn btn-warning">
+				<input type = "submit" value = "삭제" class = "btn btn-danger">
 				<a href='boardList.do' class = "btn btn-secondary">목록으로</a>
 			</td>
-			
 		</tr>
 	</table>
 </form>
-<jsp:include page="includes/footer.jsp"/>
+<script>
+	function delOk() {
+		if(!confirm('삭제하시면 복구할수 없습니다. \n 정말로 삭제하시겠습니까??')){
+	       return false;
+		}else{
+			return true; 
+		}
+	}
+</script>
