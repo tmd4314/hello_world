@@ -18,8 +18,18 @@ public class MemberServiceImpl implements MemberService{
 	}
 	
 	@Override
+	public MemberVo member(String id) {
+		return mapper.selectId(id);
+	}
+	
+	@Override
 	public boolean addMember(MemberVo member) {
 		return mapper.insertMember(member) == 1;
+	}
+	
+	@Override
+	public boolean chpassword(MemberVo member) {
+		return mapper.updateMember(member) == 1;
 	}
 	
 }

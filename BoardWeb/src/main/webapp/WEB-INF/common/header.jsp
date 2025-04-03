@@ -13,23 +13,20 @@
                 <li class="nav-item"><a class="nav-link" href="#!">Link</a></li>
                 <li class="nav-item dropdown">
                 <c:choose>
-                	<c:when test="${!empty img }">
-                    	<a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="iconimg" src="images/${img }"></a>
-                    </c:when>
                     <c:when test="${!empty logId }">
-                    	<a class="nav-link dropdown-toggle" id="navbarDropdown" href="memberModify.do" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="iconimg" src="images/${img }"></a>
-                    	
-                    </c:when>
+                    	<a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class="iconimg" src="images/${img }"></a>
+                    	<div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+		                     <a class="dropdown-item" href="memberForm.do">비밀번호 변경</a>
+		                     <a class="dropdown-item" href="#!">Another action</a>
+		                     <div class="dropdown-divider"></div>
+		                     <a class="dropdown-item" href="#!">Something else here</a>
+		                </div>
+		            </c:when>
                     <c:otherwise>
                     	<a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
                     </c:otherwise>
                 </c:choose>
-                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                     <a class="dropdown-item" href="#!">Action</a>
-                     <a class="dropdown-item" href="#!">Another action</a>
-                     <div class="dropdown-divider"></div>
-                     <a class="dropdown-item" href="#!">Something else here</a>
-                </div>
+                
                 </li>
             </ul>
         </div>

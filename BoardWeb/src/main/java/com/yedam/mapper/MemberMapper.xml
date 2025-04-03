@@ -14,6 +14,16 @@
 		  and  password = #{pw}
 	</select>
 	
+	<select id="selectId" resultType="member">
+		select user_id,
+		       password,
+		       user_name,
+		       responsibility,
+		       images
+		from   tbl_member
+		where  user_id = #{id}
+	</select>
+	
 	<insert id="insertMember" parameterType="member">
 		insert into tbl_member (user_id,
 		                       user_name,
@@ -26,4 +36,10 @@
 		       'User',
 		       #{images})
 	</insert>
+	
+	<update id="updateMember" parameterType="member">
+		update tbl_member
+		set    password = #{password}
+		where  user_id = #{userId} 
+	</update>
 </mapper>

@@ -22,6 +22,8 @@ import com.yedam.control.MainControl;
 import com.yedam.control.ModifyBoardControl;
 import com.yedam.control.ModifyFormControl;
 import com.yedam.control.SignUpControl;
+import com.yedam.control.memberFormControl;
+import com.yedam.control.passWordControl;
 
 // *.do의 요청에 실행.
 public class FrontController extends HttpServlet {
@@ -49,6 +51,9 @@ public class FrontController extends HttpServlet {
 		map.put("/main.do", new MainControl());
 		map.put("/signForm.do", new SignUpControl());
 		map.put("/signUp.do", new SignUpControl());	;
+		//회원 수정.
+		map.put("/memberForm.do", new memberFormControl()); //회원 화면
+		map.put("/passwordForm.do", new passWordControl());
 	}
 	//service
 	@Override

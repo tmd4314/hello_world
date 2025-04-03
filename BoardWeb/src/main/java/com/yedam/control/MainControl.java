@@ -17,7 +17,7 @@ public class MainControl implements Control{
 			HttpSession session = req.getSession();
 			String logId = (String) session.getAttribute("logId");
 			
-			req.getRequestDispatcher("common/main.tiles").forward(req, resp);
+			req.getRequestDispatcher("board/main.tiles").forward(req, resp);
 	}
 	
 }
