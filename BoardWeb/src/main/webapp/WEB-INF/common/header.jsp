@@ -24,9 +24,13 @@
 		            </c:when>
                     <c:otherwise>
                     	<a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                    	<div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+		                     <a class="dropdown-item" href="#!">Another action</a>
+		                     <div class="dropdown-divider"></div>
+		                     <a class="dropdown-item" href="#!">Something else here</a>
+		                </div>
                     </c:otherwise>
                 </c:choose>
-                
                 </li>
             </ul>
         </div>

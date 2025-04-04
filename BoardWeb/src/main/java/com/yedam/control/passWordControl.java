@@ -33,7 +33,6 @@ public class passWordControl implements Control {
                 // 7. 비밀번호 변경 로직
                 member.setPassword(newPw);; // 새 비밀번호 설정
                 boolean isUpdated = memberService.chpassword(member); // 회원 정보 업데이트
-
                 if (isUpdated) {
                     // 비밀번호 변경 성공
                 	req.getRequestDispatcher("member/loginForm.tiles").forward(req, resp); 
