@@ -40,11 +40,48 @@
 	</c:if>
 </table>
 </form>
+<!-- 댓글관련. -->
+<style>
+	div.reply span {
+	   padding: 5px;
+	   display: inline-block;
+	}
+	div.reply ul {
+	  list-style-type: none;
+	}
+</style>
+<div class="container reply">
+	<!-- 등록. -->
+	<div class="header">
+		<input class="col-sm-8" id="reply">
+		<button class="col-sm-2 btn btn-primary addReply">댓글등록</button>
+	</div>
+	<!-- 목록. -->
+	<div class="content">
+		<ul>
+			
+			<li>
+			  <span class="col-sm-2">글번호</span>
+			  <span class="col-sm-5">내용</span>
+			  <span class="col-sm-2">작성자</span>
+			  <span class="col-sm-2">삭제</span>
+			</li>
+		</ul>
+	</div>
+	
+	<!-- 페이징. -->
+	
+</div>
+
 <p><a href='boardList.do' class = "btn btn-secondary">목록으로</a></p>
 <script>
+	const bno = "${board.boardNo}";
+	const replyer = "${logId}";
 	document.querySelector('button.btn.btn-danger').addEventListener('click', deleteFnc);
 	
 	function deleteFnc() {
 		location.href = 'deleteForm.do?bno=${board.boardNo}';
 	}
 </script>
+<script src="js/boardService.js"></script>
+<script src="js/board1.js"></script>
