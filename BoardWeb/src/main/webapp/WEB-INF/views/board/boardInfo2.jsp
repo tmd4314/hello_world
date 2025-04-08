@@ -98,5 +98,8 @@
 		location.href = 'deleteForm.do?bno=${board.boardNo}';
 	}
 </script>
+<!--  
 <script src="js/boardService.js"></script>
 <script src="js/board1.js"></script>
+-->
+<script src="js/board2.js"></script>

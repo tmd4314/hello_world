@@ -1,30 +1,36 @@
 package com.yedam.test;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.yedam.common.DataSource;
 import com.yedam.mapper.ReplyMapper;
-import com.yedam.vo.ReplyVo;
 
 public class Test {
 	public static void main(String[] args) {
 		SqlSession sqlSession = DataSource.getInstance().openSession(true);
 		ReplyMapper mapper = sqlSession.getMapper(ReplyMapper.class);
-		ReplyVo rvo = new ReplyVo();
-		rvo.setBoardNo(602);
-		rvo.setReply("댓글테스트");
-		rvo.setReplyer("yyh4310");
-		
-		int cnt = mapper.deleteReply(2222);
-		if(cnt > 0) {
-			System.out.println("등록 성공");
+		List<Map<String, Object>> list = mapper.selectListForDT(603);
+		List<List<Object>> slist = new ArrayList<>();
+		for(int i=0; i<list.size(); i++) {
+			List<Object> ilist = new ArrayList<>();
+			ilist.add(list.get(i).get("REPLY_NO"));
+			ilist.add(list.get(i).get("REPLY"));
+			ilist.add(list.get(i).get("REPLYER"));
+			slist.add(ilist);
 		}
-		
-		List<ReplyVo> list = mapper.selectList(603);
-		for(ReplyVo reply : list) {
-			System.out.println(reply.toString());
-		}
+//		// {"data":[[], [], [].......[] ]
+		Map<String, Object> result = new HashMap<>();
+		result.put("data", list);
+
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		String json = gson.toJson(result);
+		System.out.println(json);
 	}
 }

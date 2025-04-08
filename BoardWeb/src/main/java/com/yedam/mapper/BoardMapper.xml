@@ -32,12 +32,10 @@
 	         	</when>
 	         </choose>
 	         order by     board_no desc) a) b 
-	where b.rn > (#{page} - 1) * 5
-	<![CDATA[
-		and   b.rn <= (#{page} * 5)
-		
-	]]>
+			<![CDATA[
+			]]>
   </select>
+			
   
   <!-- 등록. -->
   <insert id="insertBoard" parameterType="board">

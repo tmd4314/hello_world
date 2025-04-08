@@ -23,7 +23,9 @@ import com.yedam.control.LogoutControl;
 import com.yedam.control.MainControl;
 import com.yedam.control.ModifyBoardControl;
 import com.yedam.control.ModifyFormControl;
+import com.yedam.control.RLDatatable;
 import com.yedam.control.RemoveReplyControl;
+import com.yedam.control.ReplyCountControl;
 import com.yedam.control.ReplyListControl;
 import com.yedam.control.SignUpControl;
 import com.yedam.control.memberFormControl;
@@ -64,6 +66,9 @@ public class FrontController extends HttpServlet {
 		map.put("/replyList.do", new ReplyListControl());
 		map.put("/removeReply.do", new RemoveReplyControl());
 		map.put("/addReply.do", new AddReplyControl());
+		map.put("/replyCount.do", new ReplyCountControl());
+		
+		map.put("/replyListDatatable.do", new RLDatatable());
 	}
 	//service
 	@Override
