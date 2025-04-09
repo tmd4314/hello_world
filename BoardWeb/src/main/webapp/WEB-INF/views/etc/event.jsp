@@ -64,9 +64,10 @@ document.addEventListener('DOMContentLoaded', function() {
           eventClick: function(arg) {
             if (confirm('정말 삭제하시겠습니까?')) {
             	console.log(arg)
+            	let title = arg.event.title
             	let start = arg.event.startStr
             	let end = arg.event.endStr
-            	fetch('removeEvent.do?start=' + start + '&end=' + end)
+            	fetch('removeEvent.do?title=' + title + '&start=' + start + '&end=' + end)
         		.then(result => result.json())
         		.then(result => {
         			alert("삭제 성공");

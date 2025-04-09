@@ -15,10 +15,12 @@ public class RemoveEvent implements Control {
 
 	@Override
 	public void exec(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String title = req.getParameter("title");
 		String start = req.getParameter("start");
 		String end = req.getParameter("end");
 		
 		EventVo event = new EventVo();
+		event.setTitle(title);
 		event.setStart(start);
 		event.setEnd(end);
 		
