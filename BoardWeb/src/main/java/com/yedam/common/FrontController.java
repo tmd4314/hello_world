@@ -16,6 +16,9 @@ import com.yedam.control.BoardControl;
 import com.yedam.control.BoardListControl;
 import com.yedam.control.DeleteBoardControl;
 import com.yedam.control.DeleteFormControl;
+import com.yedam.control.ELDatatable;
+import com.yedam.control.EventAddControl;
+import com.yedam.control.EventFormControl;
 import com.yedam.control.JsControl;
 import com.yedam.control.LoginControl;
 import com.yedam.control.LoginFormControl;
@@ -24,6 +27,7 @@ import com.yedam.control.MainControl;
 import com.yedam.control.ModifyBoardControl;
 import com.yedam.control.ModifyFormControl;
 import com.yedam.control.RLDatatable;
+import com.yedam.control.RemoveEvent;
 import com.yedam.control.RemoveReplyControl;
 import com.yedam.control.ReplyCountControl;
 import com.yedam.control.ReplyListControl;
@@ -67,8 +71,12 @@ public class FrontController extends HttpServlet {
 		map.put("/removeReply.do", new RemoveReplyControl());
 		map.put("/addReply.do", new AddReplyControl());
 		map.put("/replyCount.do", new ReplyCountControl());
-		
 		map.put("/replyListDatatable.do", new RLDatatable());
+		// fullcalendar 관련.
+		map.put("/eventForm.do", new EventFormControl());
+		map.put("/addEvent.do", new EventAddControl());
+		map.put("/eventListDatatable.do", new ELDatatable());
+		map.put("/removeEvent.do", new RemoveEvent());
 	}
 	//service
 	@Override

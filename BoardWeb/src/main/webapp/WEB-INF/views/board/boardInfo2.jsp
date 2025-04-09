@@ -2,6 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<link href="https://cdn.datatables.net/2.2.2/css/dataTables.dataTables.css" rel="stylesheet"/>
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
+<script src="https://cdn.datatables.net/2.2.2/js/dataTables.js"></script>
 <!-- webapps/WEB-INF/views/board.jsp -->
 <form action="modifyForm.do">
 <input type="hidden" name ="bno" value="${board.boardNo }">
@@ -41,52 +45,28 @@
 </table>
 </form>
 <!-- 댓글관련. -->
-<style>
-	div.reply span {
-	   padding: 5px;
-	   display: inline-block;
-	}
-	div.reply ul {
-	  list-style-type: none;
-	}
-</style>
-<div class="container reply">
-	<!-- 등록. -->
-	<div class="header">
-		<input class="col-sm-8" id="reply">
-		<button class="col-sm-2 btn btn-primary addReply">댓글등록</button>
-	</div>
-	<!-- 목록. -->
-	<div class="content">
-		<ul>
-			
-			<li>
-			  <span class="col-sm-2">글번호</span>
-			  <span class="col-sm-5">내용</span>
-			  <span class="col-sm-2">작성자</span>
-			  <span class="col-sm-2">삭제</span>
-			</li>
-		</ul>
-	</div>
-	
-	<!-- 페이징. -->
-	<nav aria-label="...">
-	  <ul class="pagination pagination-sm justify-content-center" >
-	    <!-- <li class="page-item disabled">
-	      <a class="page-link">Previous</a>
-	    </li>
-	    <li class="page-item"><a class="page-link" href="#">1</a></li>
-	    <li class="page-item active" aria-current="page">
-	      <a class="page-link" href="#">2</a>
-	    </li>
-	    <li class="page-item"><a class="page-link" href="#">3</a></li>
-	    <li class="page-item">
-	      <a class="page-link" href="#">Next</a>
-	    </li>  -->
-	  </ul>
-	</nav>
+<input class="col-sm-8" id="reply"/>
+<button id="addRow" class="btn btn-primary">글등록</button>
+<button id="delRow" class="btn btn-danger">글삭제</button>
+<table id="example" class="display" style="width:100%">
+        <thead>
+            <tr>
+                <th>댓글번호</th>
+                <th>내용</th>
+                <th>작성자</th>
+                <th>작성일시</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                 <th>댓글번호</th>
+                <th>내용</th>
+                <th>작성자</th>
+                <th>작성일시</th>
+            </tr>
+        </tfoot>
+    </table>
 
-</div>
 
 <p><a href='boardList.do' class = "btn btn-secondary">목록으로</a></p>
 <script>
@@ -98,8 +78,5 @@
 		location.href = 'deleteForm.do?bno=${board.boardNo}';
 	}
 </script>
-<!--  
-<script src="js/boardService.js"></script>
-<script src="js/board1.js"></script>
--->
+
 <script src="js/board2.js"></script>
