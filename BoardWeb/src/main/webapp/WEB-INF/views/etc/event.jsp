@@ -36,19 +36,23 @@ document.addEventListener('DOMContentLoaded', function() {
           selectMirror: true,
           select: function(arg) {
             var title = prompt('Event Title:');
-            //console.log(arg);
+            console.log(arg);
             if (title) {
-              fetch('addEvent.do?title=' + title + '&start=' + arg.startStr + '&end=' + arg.endStr)
+              let allDay = arg.allDay;
+              let startStr = allDay ? arg.startStr : arg.startStr.substring(0, 19);
+              let endStr = allDay ? arg.endStr : arg.endStr.substring(0, 19);
+              fetch('addEvent.do?title=' + title + '&start=' + startStr + '&end=' + endStr)
                 .then(result => result.json())
                 .then(result => {
-                  let obj = result.retVal;
-                  if (title) {
+                 if (result.retCode == 'OK') {
                     calendar.addEvent({
                       title: title,
                       start: arg.start,
                       end: arg.end,
                       allDay: arg.allDay
-                    });
+                    })
+                  }else {
+                      alert('등록 실패');
                   }
                   calendar.unselect();
                 })
