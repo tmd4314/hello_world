@@ -20,7 +20,9 @@ public class EventAddControl implements Control {
 	@Override
 	public void exec(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		resp.setContentType("text/json;charset=utf-8");
+		req.setCharacterEncoding("utf-8");
+		resp.setContentType("application/json; charset=UTF-8"); // ContentType 설정
+		
 		String title = req.getParameter("title");
 		String start = req.getParameter("start");
 		String end = req.getParameter("end");

@@ -21,14 +21,22 @@ public class EventServiceImpl implements EventService {
 
 	@Override
 	public List<Map<String, Object>> eventListForDT() {
-		// TODO Auto-generated method stub
 		return mapper.selectListForDT();
 	}
 
 	@Override
 	public boolean removeEvent(EventVo evo) {
-		// TODO Auto-generated method stub
 		return mapper.deleteEvent(evo) == 1;
+	}
+
+	@Override
+	public List<Map<String, Object>> cntPerWriter() {
+		return mapper.selectWriter();
+	}
+
+	@Override
+	public void logCreate(Map<String, String> map) {
+		mapper.insertLogging(map);
 	}
 	
 	

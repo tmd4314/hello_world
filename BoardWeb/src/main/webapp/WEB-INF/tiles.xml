@@ -28,6 +28,11 @@
   	<put-attribute name="body" value="/WEB-INF/views/member/{1}.jsp" />
   </definition>
   
+    <!-- 회원 용도 -->
+  <definition name="WILDCARD:user/*" extends="myapp.common">
+  	<put-attribute name="body" value="/WEB-INF/views/etc/{1}.jsp" />
+  </definition>
+  
   <!-- 관리자용 템플릿 -->
   <definition name="myapp.admin" template="/WEB-INF/admin/template.jsp">
     <put-attribute name="title" value="Tiles tutorial homepage" />

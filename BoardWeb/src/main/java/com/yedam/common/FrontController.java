@@ -14,6 +14,8 @@ import com.yedam.control.AddReplyControl;
 import com.yedam.control.BoardAddControl;
 import com.yedam.control.BoardControl;
 import com.yedam.control.BoardListControl;
+import com.yedam.control.ChartControl;
+import com.yedam.control.ChartJsonCont;
 import com.yedam.control.DeleteBoardControl;
 import com.yedam.control.DeleteFormControl;
 import com.yedam.control.ELDatatable;
@@ -77,6 +79,9 @@ public class FrontController extends HttpServlet {
 		map.put("/addEvent.do", new EventAddControl());
 		map.put("/eventListDatatable.do", new ELDatatable());
 		map.put("/removeEvent.do", new RemoveEvent());
+		//구글 차트
+		map.put("/chart.do", new ChartControl());
+		map.put("/chartJson.do", new ChartJsonCont());
 	}
 	//service
 	@Override

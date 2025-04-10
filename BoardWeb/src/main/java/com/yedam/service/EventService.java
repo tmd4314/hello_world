@@ -9,4 +9,9 @@ public interface EventService {
 	List<Map<String, Object>> eventListForDT();
 	boolean addEvent(EventVo evo);
 	boolean removeEvent(EventVo evo);
+	
+	//차트
+	List<Map<String, Object>> cntPerWriter();
+	//로그 생성.
+	void logCreate(Map<String, String>map);
 }

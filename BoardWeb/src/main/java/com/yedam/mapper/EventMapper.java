@@ -11,4 +11,8 @@ public interface EventMapper {
 	List<Map<String, Object>> selectListForDT();
 	int insertEvent(EventVo evo); //이벤트 등록.
 	int deleteEvent(EventVo evo); // 이벤트 삭제.
+	// 차트
+	List<Map<String, Object>> selectWriter();
+	//로그
+	int insertLogging(Map<String, String>map);
 }

@@ -16,6 +16,8 @@
          	<a class="list-group-item list-group-item-action list-group-item-light p-3" href="logout.do">로그아웃(<c:out value="${logId }"/>)</a>
          </c:otherwise>
         </c:choose>
+        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="javascript.do">JS연습</a>
         <a class="list-group-item list-group-item-action list-group-item-light p-3" href="eventForm.do">Event</a>
+        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="chart.do">Chart</a>
     </div>
 </div>

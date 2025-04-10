@@ -7,7 +7,7 @@
 	<select id="selectListForDT" resultType="map">
 		select title,
 		       start_date,
-		       end_date
+		       end_date 
         from   tbl_event
 	</select>
 	
@@ -24,9 +24,29 @@
 	<!-- 삭제 -->
 	<delete id="deleteEvent" parameterType="event">
 	  delete from tbl_event
-	  where  start_date = #{start}
+	  where  title = #{title}
+	    and  start_date = #{start}
 	    and  end_date = #{end}
 	</delete>
+	
+	<select id="selectWriter" resultType="map">
+		select   user_name as "userName",
+		         b.writer as "writer",
+		         count(1) as "cnt"
+		from     tbl_board b
+		join     tbl_member m
+		on       b.writer = m.user_id
+		group by user_name, b.writer
+	</select>
+	
+	<insert id="insertLogging" parameterType="map">
+		insert into tbl_logging(log_id,
+                        req_path,
+                        req_host)
+		values(logging_seq.nextval,
+		       #{page},
+		       #{host})
+	</insert>
 
 	
 </mapper>
