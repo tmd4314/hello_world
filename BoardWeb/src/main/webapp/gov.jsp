@@ -94,7 +94,7 @@
     
     //tr 클릭 이벤트 핸들러.
     function openWindow(center={}) {
-    	window.open('sample.jsp?lat=' + center.lat +'&lng=' + center.lng);
+    	window.open('sample.jsp?lat=' + center.lat +'&lng=' + center.lng + '&address=' + center.address);
     }
     
     

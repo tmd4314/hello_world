@@ -16,6 +16,7 @@
 	console.log("${param.lng}");
 		const lat = "${param.lat}";
 		const lng = "${param.lng}";
+		const addr = "${param.address}";
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		    mapOption = { 
 		        center: new kakao.maps.LatLng(lat, lng), // 지도의 중심좌표
@@ -35,7 +36,7 @@
 		// 마커가 지도 위에 표시되도록 설정합니다
 		marker.setMap(map);
 		
-		var iwContent = '<div style="padding:5px;">Hello World! <br><a href="https://map.kakao.com/link/map/Hello World!,'+ lat +','+ lng +'" style="color:blue" target="_blank">큰지도보기</a> <a href="https://map.kakao.com/link/to/Hello World!,'+ lat +','+ lng +'" style="color:blue" target="_blank">길찾기</a></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+		var iwContent = '<div style="padding:5px;">'+addr+ '<br><a href="https://map.kakao.com/link/map/'+addr+ ','+ lat +','+ lng +'" style="color:blue" target="_blank">큰지도보기</a> <a href="https://map.kakao.com/link/to/'+addr+ ','+ lat +','+ lng +'" style="color:blue" target="_blank">길찾기</a></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
 		    iwPosition = new kakao.maps.LatLng(lat, lng); //인포윈도우 표시 위치입니다
 		
 		// 인포윈도우를 생성합니다
