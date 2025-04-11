@@ -23,6 +23,8 @@
     </thead>
     <tbody id="centerList"></tbody>
   </table>
+  
+  <ul id="list"></ul>
 
   <script>
     let url =
@@ -96,10 +98,8 @@
     function openWindow(center={}) {
     	window.open('sample.jsp?lat=' + center.lat +'&lng=' + center.lng + '&address=' + center.address);
     }
-    
-    
-    
   </script>
+  <script src="js/array2.js"></script>
 </body>
 
 </html>
