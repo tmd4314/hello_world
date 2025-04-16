@@ -81,7 +81,7 @@ public class FrontController extends HttpServlet {
 		map.put("/removeEvent.do", new RemoveEvent());
 		//구글 차트
 		map.put("/chart.do", new ChartControl());
-		map.put("/chartJson.do", new ChartJsonCont());
+		map.put("/chartJson.do", new ChartJsonCont()); //차트 json
 	}
 	//service
 	@Override
